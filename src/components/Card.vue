@@ -1,16 +1,18 @@
 <template>
-  <div class="card">
-    <Carousel :images="images"></Carousel>
-    <div class="info">
-      <h1>Liniee</h1>
-      <h2>Jardim Olhos D'Água</h2>
-      <h3>Ribeirão Preto - SP</h3>
-      <div class="details">
-        <p><img :src="require('@/assets/images/key.svg')" alt="Ícone chave"> Apartamentos de 97 e 126m²</p>
-        <p><img :src="require('@/assets/images/bed.svg')" alt="Ícone cama"> 3 suítes</p>
-        <p><img :src="require('@/assets/images/pin.svg')" alt="Ícone localização"> Localização privilegiada</p>
+  <div>
+    <div class="card" v-if="product.address.geo_location && product.address.geo_location.latitude && product.address.geo_location.longitude">
+      <Carousel :images="images"></Carousel>
+      <div class="info">
+        <h1 v-html="product.name"></h1>
+        <h2 v-html="product.address.district"></h2>
+        <h3 v-html="product.address.city"></h3>
+        <div class="details">
+          <p><img :src="require('@/assets/images/key.svg')" alt="Ícone chave"> Apartamentos de 97 e 126m²</p>
+          <p><img :src="require('@/assets/images/bed.svg')" alt="Ícone cama"> 3 suítes</p>
+          <p><img :src="require('@/assets/images/pin.svg')" alt="Ícone localização"> Localização privilegiada</p>
+        </div>
+        <button>Ver mais</button>
       </div>
-      <button>Ver mais</button>
     </div>
   </div>
 </template>
@@ -23,8 +25,12 @@ export default {
   components: {
     Carousel,
   },
+  props: {
+    product: Object
+  },
   data () {
     return {
+      data: this.products,
       images: [
         'https://www.bild.com.br/uploads/photo/file/13133/PISCINA_01.jpg',
         'https://www.bild.com.br/uploads/photo/file/13134/PORTICO_DE_ENTRADA.jpg',
@@ -32,6 +38,9 @@ export default {
       ]
     }
   },
+  created: function() {
+    console.log(this.product.address.geo_location)
+  }
 }
 </script>
 
