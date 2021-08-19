@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <div class="card" v-if="product.address.geo_location && product.address.geo_location.latitude && product.address.geo_location.longitude">
-      <Carousel :images="product.photos"></Carousel>
-      <div class="info">
-        <h1 v-html="product.name"></h1>
-        <h2 v-html="product.address.district"></h2>
-        <h3 v-html="product.address.city"></h3>
-        <div class="details">
-          <p v-if="usable_areas">
-            <img :src="require('@/assets/images/key.svg')" alt="Ícone chave">
-            Apartamentos de {{ usable_areas }}m²
-          </p>
-          <p v-if="en_suites">
-            <img :src="require('@/assets/images/bed.svg')" alt="Ícone cama">
-            {{ en_suites }} suítes
-          </p>
-          <p v-if="checkLocal">
-            <img :src="require('@/assets/images/pin.svg')" alt="Ícone localização">
-            Localização privilegiada
-          </p>
-        </div>
-        <button>Ver mais</button>
+  <div class="card" v-if="product.address.geo_location && product.address.geo_location.latitude && product.address.geo_location.longitude">
+    <Carousel :images="product.photos"></Carousel>
+    <div class="info">
+      <h1 v-html="product.name"></h1>
+      <h2 v-html="product.address.district"></h2>
+      <h3 v-html="product.address.city"></h3>
+      <div class="details">
+        <p v-if="usable_areas">
+          <img :src="require('@/assets/images/key.svg')" alt="Ícone chave">
+          Apartamentos de {{ usable_areas }}m²
+        </p>
+        <p v-if="en_suites">
+          <img :src="require('@/assets/images/bed.svg')" alt="Ícone cama">
+          {{ en_suites }} suítes
+        </p>
+        <p v-if="checkLocal">
+          <img :src="require('@/assets/images/pin.svg')" alt="Ícone localização">
+          Localização privilegiada
+        </p>
       </div>
+      <button>Ver mais</button>
     </div>
   </div>
 </template>
@@ -73,8 +71,6 @@ export default {
     usable_areas() {
       const usable_areas = this.product.units.usable_areas
       if (usable_areas && usable_areas.length) {
-        console.log('-------')
-        console.log(usable_areas)
         for (var i = 0; i < usable_areas.length; i++)
           if (usable_areas[i] <= 10)
             return false

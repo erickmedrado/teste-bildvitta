@@ -25,7 +25,6 @@ export default {
       try {
         const response = await http.get('challenges/products.json')
         this.products = Object.freeze(response.data.products)
-        console.log(this.products)
       } catch (e) {
         this.errors.push(e)
       }
@@ -43,6 +42,5 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
   }
 </style>
