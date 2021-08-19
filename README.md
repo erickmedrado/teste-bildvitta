@@ -1,4 +1,4 @@
-# Front-end NAVE | Bild e Vitta
+# Frontend Challenge NAVE | Bild e Vitta
 > Esse é um pequeno projeto criado como base para a avaliação de habilidades técnicas para o papel de Front-end.
 
 ### Veja o projeto em produção <a href="https://teste-bildvitta.vercel.app/#/">aqui.</a>
