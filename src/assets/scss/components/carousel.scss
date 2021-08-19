@@ -1,0 +1,52 @@
+@import '../variables';
+
+.carousel { 
+  z-index: 1;
+
+  .favorite {
+    top: 15px;
+    right: 15px;
+    position: absolute;
+
+    img {
+      width: 22px;
+    }
+  }
+
+  .carousel__slide {
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+
+      img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        transition: transform .5s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+    }
+  }
+
+  .carousel__pagination {
+    right: 12px;
+    bottom: 26px;
+    position: absolute;
+
+    .carousel__pagination-button {
+      padding: 0;
+      width: 7px;
+      height: 7px;
+      margin: 4px;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 1px solid $secondary ;
+      background-color: transparent;
+    }
+
+    .carousel__pagination-button--active {
+      background-color: $secondary;
+    }
+  }
+}

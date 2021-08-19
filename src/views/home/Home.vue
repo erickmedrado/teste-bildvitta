@@ -1,11 +1,26 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <Card></Card>
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card.vue'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Card,
+  },
 }
 </script>
+
+<style scoped lang="scss">
+  .home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
