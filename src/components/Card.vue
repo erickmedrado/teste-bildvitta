@@ -7,13 +7,13 @@
         <h2 v-html="product.address.district"></h2>
         <h3 v-html="product.address.city"></h3>
         <div class="details">
-          <p>
+          <p v-if="usable_areas">
             <img :src="require('@/assets/images/key.svg')" alt="Ícone chave">
-            Apartamentos de 97 e 126m²
+            Apartamentos de {{ usable_areas }}m²
           </p>
-          <p v-if="listSuites">
+          <p v-if="en_suites">
             <img :src="require('@/assets/images/bed.svg')" alt="Ícone cama">
-            {{ listSuites }} suítes
+            {{ en_suites }} suítes
           </p>
           <p v-if="checkLocal">
             <img :src="require('@/assets/images/pin.svg')" alt="Ícone localização">
@@ -45,7 +45,44 @@ export default {
       max_lng: -47.780
     }
   },
+  methods: {
+    sortList(arr) {
+      let list = arr.map(elem => elem.toFixed(0))
+      list = list.filter(value => value > 0)
+      list = list.sort((a, b) => a - b)
+      return list
+    },
+    listToString(arr) {
+      if (arr && arr.length) {
+        let list = this.sortList(arr, 0)
+        if (list.length > 1) {
+          let str = list.pop()
+          return list.join(', ') + ' e ' + str
+        } else
+          return list.toString()
+      } else if (arr && arr > 0) {
+        return arr.toFixed(0)
+      } else
+        return false
+    }
+  },
   computed: {
+    en_suites() {
+      return this.listToString(this.product.units.en_suites)
+    },
+    usable_areas() {
+      const usable_areas = this.product.units.usable_areas
+      if (usable_areas && usable_areas.length) {
+        console.log('-------')
+        console.log(usable_areas)
+        for (var i = 0; i < usable_areas.length; i++)
+          if (usable_areas[i] <= 10)
+            return false
+      } else if (usable_areas <= 10) {
+        return false
+      }
+      return this.listToString(usable_areas)
+    },
     checkLocal() {
       const geo = this.product.address.geo_location
       if(geo.latitude >= this.min_lat && geo.latitude <= this.max_lat &&
@@ -54,28 +91,6 @@ export default {
       else
         return false
     },
-    sortSuites() {
-      let en_suites = this.product.units.en_suites
-      if (en_suites && en_suites.length) {
-        en_suites = en_suites.filter(suites => suites !== 0)
-        en_suites = en_suites.sort((a, b) => a - b)
-        return en_suites
-      } else
-        return en_suites
-    },
-    listSuites() {
-      let en_suites = this.sortSuites
-      if (en_suites && en_suites.length) {
-        if (en_suites.length > 1) {
-          let str = en_suites.pop()
-          return en_suites.join(', ') + ' e ' + str
-        } else
-          return en_suites.toString()
-      } else if (en_suites && en_suites > 0) {
-        return en_suites
-      } else
-        return false
-    }
   },
 }
 </script>
