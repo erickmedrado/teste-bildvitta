@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <carousel>
-      <slide v-for="(image, index) in images" :key="index">
-        <img :src="image" alt="Foto do apartamento">
-      </slide>
-      <template #addons>
-        <pagination/>
-        <div class="favorite" @click="starred = !starred">
-          <img v-if="!starred" :src="require('@/assets/images/star-outline.svg')" alt="Ícone chave">
-          <img v-if="starred" :src="require('@/assets/images/star-solid.svg')" alt="Ícone chave">
-        </div>
-      </template>
-    </carousel>
-  </div>
+  <carousel>
+    <slide v-for="(image, index) in images" :key="index">
+      <img :src="image" alt="Foto do apartamento">
+    </slide>
+    <template #addons>
+      <pagination/>
+      <div class="favorite" @click="starred = !starred">
+        <img v-if="!starred" :src="require('@/assets/images/star-outline.svg')" alt="Ícone chave">
+        <img v-if="starred" :src="require('@/assets/images/star-solid.svg')" alt="Ícone chave">
+      </div>
+    </template>
+  </carousel>
 </template>
 
 <script>
