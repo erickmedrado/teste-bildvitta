@@ -11,8 +11,10 @@
   "dependencies": {
     "@chenfengyuan/vue-carousel": "^2.0.0-beta",
     "@vue/compiler-sfc": "^3.2.4",
+    "@vuelidate/core": "^2.0.0-alpha.24",
+    "@vuelidate/validators": "^2.0.0-alpha.21",
     "axios": "^0.21.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.16.2",
     "reset-css": "^5.0.1",
     "vue": "^3.2.4",
     "vue-router": "^4.0.0-0",
@@ -69,9 +71,14 @@
     "not dead"
   ],
   "jest": {
+    "verbose": true,
     "preset": "@vue/cli-plugin-unit-jest",
     "transform": {
-      "^.+\\.vue$": "vue-jest"
-    }
+      "^[^.]+.vue$": "vue-jest",
+      "^.+\\.js$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!vue3-carousel/dist/carousel.css)"
+    ]
   }
 }
